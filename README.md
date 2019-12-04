@@ -18,7 +18,7 @@ Hazard_Detection_Unit : Hazard_Detection_Unit
 Control : Control
 Immgen : Immgen
 Register_Equal : Register_Equal
-MUX_IDEX : MUX?
+MUX_IDEX : MUXcontrol
 Add_Branch : Adder
 Registers : Registers
 
@@ -33,7 +33,7 @@ Pipe_ID_EX : Pipe_ID_EX
 
 MUX_ALU1 : MUX32_3
 MUX_ALU2 : MUX32_3
-MUX_ALU_src : MUX32_3
+MUX_ALUSrc : MUX32
 ALU : ALU
 ALU_Control : ALU_Control 
 Forwarding_Unit : Forwarding_Unit
