@@ -1,7 +1,7 @@
 各stage 所需的component 以及對應的 class
 
 Component : Class
-------------------IF Stage----------------
+------------------IF Stage ----------------
 
 MUX_PC : MUX32
 PC : PC
@@ -11,7 +11,6 @@ Instruction_Memory : Instruction_Memory
 ------------------IF / ID ----------------
 
 Pipe_IF_ID : Pipe_IF_ID
-IF_ID_Flush : IF_ID_Flush
 
 ------------------ID Stage----------------
 
