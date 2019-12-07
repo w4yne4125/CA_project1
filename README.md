@@ -16,7 +16,7 @@
 
 - Hazard_Detection_Unit : Hazard_Detection_Unit
 - Control : Control		[need to deal with flush]
-- Immgen : Immgen
+- Immgen : Immgen		[need to check]
 - Register_Equal : Register_Equal
 - MUX_IDEX : MUXcontrol
 - Add_Branch : Adder       [done]
