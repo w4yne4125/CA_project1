@@ -15,7 +15,7 @@
 ----------------------------------
 
 - Hazard_Detection_Unit : Hazard_Detection_Unit
-- Control : Control
+- Control : Control		[need to deal with flush]
 - Immgen : Immgen
 - Register_Equal : Register_Equal
 - MUX_IDEX : MUXcontrol
@@ -27,7 +27,7 @@
 
 ----------------------------------
 
-- Pipe_ID_EX : Pipe_ID_EX
+- Pipe_ID_EX : Pipe_ID_EX	[todo:length of immed]
 
 ----------------------------------
 
