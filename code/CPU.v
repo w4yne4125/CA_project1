@@ -8,6 +8,16 @@ module CPU
 input         clk_i;
 input         start_i;
 
+
+------------------IF Stage----------------
+
+MUX32 MUX_PC(
+
+
+
+);
+
+
 PC PC(
     .clk_i          (),
     .start_i        (),

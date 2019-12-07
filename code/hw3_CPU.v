@@ -66,7 +66,7 @@ Hazard_Detection_Unit Hazard_Detection_Unit( // CARE
 );
 
 Control Control( // CARE
-    .Op_i       (Instruction_Memory.instr_o[6:0]),
+    .Op_i       (Pipe_IF_ID.instruction_o[6:0]),
     .RegEqual_i (Register_Equal.Equal_o), 
     .MemWrite_o (),
     .MemRead_o  (),
@@ -238,10 +238,9 @@ Pipe_EX_MEM Pipe_EX_MEM(
 Data_Memory Data_Memory(
     .clk_i       (clk_i),
     .addr_i      (Pipe_EX_MEM.ALU_Res_o),
-    .memRead_i   (Pipe_EX_MEM.MemRead_o),
-    .memWrite_i  (Pipe_EX_MEM.MemWrite_o),
-    .Write_Data_i(Pipe_EX_MEM.Write_Data_o),
-    .Read_Data_o ()
+    .MemWrite_i  (Pipe_EX_MEM.MemWrite_o),
+    .data_i(Pipe_EX_MEM.Write_Data_o),
+    .data_o ()
 );
 
 
@@ -253,7 +252,7 @@ Pipe_MEM_WB Pipe_MEM_WB(
     
     .ALU_Res_i  (Pipe_EX_MEM.ALU_Res_o),
     .ALU_Res_o  (),
-    .Read_Data_i(Data_Memory.Read_Data_o),
+    .Read_Data_i(Data_Memory.data_o),
     .Read_Data_o(),
     .RdAddr_i   (Pipe_EX_MEM.RdAddr_o),
     .RdAddr_o   (),
