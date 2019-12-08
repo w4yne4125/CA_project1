@@ -26,13 +26,13 @@ output flush_o;
 if(Op_i == 7'b0110011)//Rformat
 	begin
 		assign ALUOp_o = 2'b10;
-		ALUSrc_o = 1'b0;
-		Branch_o = 1'b0;
-		MemRead_o = 1'b0;
-		MemWrite_o = 1'b0;
-		RegWrite_o = 1'b1;
-		MemToReg_o = 1'b0;
-		flush_o = 1'b0;
+		assign LUSrc_o = 1'b0;
+		assign Branch_o = 1'b0;
+		assign MemRead_o = 1'b0;
+		assign MemWrite_o = 1'b0;
+		assign RegWrite_o = 1'b1;
+		assign MemToReg_o = 1'b0;
+		assign flush_o = 1'b0;
 	end
 if(Op_i == 7'b0010011)//addi
 	begin
