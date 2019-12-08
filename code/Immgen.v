@@ -7,7 +7,7 @@ output reg [31:0] data_o;
 
 if (data_i[6:0] == 7'b0010011 || data_i[6:0] == 7'b0000011)
 	begin
-		assign data_o = { {20{data_i[31]}} , data_i[31:21] };
+		assign data_o = { {20{data_i[31]}} , data_i[31:20] };
 	end
 if (data[6:0] == 7'b0100011)
 	begin
