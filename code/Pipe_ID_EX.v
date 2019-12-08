@@ -54,19 +54,37 @@ output reg [1:0] ALUOp_o;//
 
 
 always @(posedge clk_i or negedge rst_i)begin
-	RSdata_o <= RSdata_i;
-	RTdata_o <= RTdata_i;
-	
-	RSaddr_o <= RSaddr_i;
-	RTaddr_o <= RTaddr_i;
-	RDaddr_o <= RDaddr_i;
-	ALUSrc_o <= ALUSrc_o;
-    
-	MemToReg_o <= MemToReg_i;
-    RegWrite_o <= RegWrite_i;
-    MemWrite_o <= MemWrite_i;
-    MemRead_o <= MemRead_i;
-    ALUOp_o <= ALUOp_i;
+    if (!rst_i) begin
+    	RSdata_o <= 0;
+    	RTdata_o <= 0;
+    	
+    	RSaddr_o <= 0;
+    	RTaddr_o <= 0;
+    	RDaddr_o <= 0;
+    	ALUSrc_o <= 0;
+       
+    	MemToReg_o <= 0;
+        RegWrite_o <= 0;
+        MemWrite_o <= 0;
+        MemRead_o <= 0;
+        ALUOp_o <= 0;
+        
+    end
+    else begin
+    	RSdata_o <= RSdata_i;
+    	RTdata_o <= RTdata_i;
+    	
+    	RSaddr_o <= RSaddr_i;
+    	RTaddr_o <= RTaddr_i;
+    	RDaddr_o <= RDaddr_i;
+    	ALUSrc_o <= ALUSrc_o;
+       
+    	MemToReg_o <= MemToReg_i;
+        RegWrite_o <= RegWrite_i;
+        MemWrite_o <= MemWrite_i;
+        MemRead_o <= MemRead_i;
+        ALUOp_o <= ALUOp_i;
+    end
 
 end
 endmodule
