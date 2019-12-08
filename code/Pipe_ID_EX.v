@@ -33,7 +33,7 @@ module Pipe_ID_EX(
 input clk_i,rst_i;
 input [31:0] RSdata_i,RTdata_i;
 input [4:0] RSaddr_i,RTaddr_i,RDaddr_i;
-input immed_i;
+input [31:0]immed_i;
 input ALUSrc_i;//
 input MemToReg_i;//
 input RegWrite_i;//
@@ -43,7 +43,7 @@ input [1:0] ALUOp_i;
 
 output reg [31:0] RSdata_o,RTdata_o;
 output reg [4:0] RSaddr_o,RTaddr_o,RDaddr_o;
-output reg immed_o;
+output reg [31:0]immed_o;
 output reg ALUSrc_o;//
 output reg MemToReg_o;//                                                                               
 output reg RegWrite_o;//
