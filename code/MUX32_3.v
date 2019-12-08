@@ -6,7 +6,7 @@ input [31:0] data2_i;
 input [1:0] select_i;
 output [31:0] data_o;
 
-data_o = (select_i == 2'b00) ? data0_i :
+assign data_o = (select_i == 2'b00) ? data0_i :
 		 (select_i == 2'b10) ? data1_i :
 								data2_i;
 
