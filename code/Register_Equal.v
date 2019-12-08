@@ -1,15 +1,15 @@
 module Register_Equal(
-	data1_in,
-	data2_in,
-	data_o
+	RSData_i,
+	RTData_i,
+	Equal_o
 )
-input [31:0]data1_in;
-input [31:0]data2_in;
-output Equal;
+input [31:0]RSData_i;
+input [31:0]RTData_i;
+output Equal_o;
 
-if (data1_in == data2_in)
-	assign Equal = 1; 
+if (RSData_i == RTData_i)
+	assign Equal_o = 1; 
 else
-	assign Equal = 0;
+	assign Equal_o = 0;
 
 endmodule
