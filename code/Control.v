@@ -25,53 +25,58 @@ output flush_o;
 
 if(Op_i == 7'b0110011)//Rformat
 	begin
-		ALUOp_o <= 2'b10;
-		ALUSrc_o <= 1'b0;
-		Branch_o <= 1'b0;
-		MemRead_o <= 1'b0;
-		MemWrite_o <= 1'b0;
-		RegWrite_o <= 1'b1;
-		MemToReg_o <= 1'b0;
+		assign ALUOp_o = 2'b10;
+		ALUSrc_o = 1'b0;
+		Branch_o = 1'b0;
+		MemRead_o = 1'b0;
+		MemWrite_o = 1'b0;
+		RegWrite_o = 1'b1;
+		MemToReg_o = 1'b0;
+		flush_o = 1'b0;
 	end
 if(Op_i == 7'b0010011)//addi
 	begin
-		ALUOp_o <= 2'b00;
-		ALUSrc_o <= 1'b1;
-		Branch_o <= 1'b0;
-		MemRead_o <= 1'b0;
-		MemWrite_o <= 1'b0;
-		RegWrite_o <= 1'b1;
-		MemToReg_o <= 1'b0;
+		assign ALUOp_o = 2'b00;
+		assign ALUSrc_o = 1'b1;
+		assign Branch_o = 1'b0;
+		assign MemRead_o = 1'b0;
+		assign MemWrite_o = 1'b0;
+		assign RegWrite_o = 1'b1;
+		assign MemToReg_o = 1'b0;
+		assign flush_o = 1'b0;
 	end
 if(Op_i == 7'b0000011)//lw
 	begin
-		ALUOp_o <= 2'b00;
-        ALUSrc_o <= 1'b1;
-        Branch_o <= 1'b0;
-        MemRead_o <= 1'b1;
-        MemWrite_o <= 1'b0;
-        RegWrite_o <= 1'b1;
-        MemToReg_o <= 1'b1;
+		assign ALUOp_o = 2'b00;
+        assign ALUSrc_o = 1'b1;
+        assign Branch_o = 1'b0;
+        assign MemRead_o = 1'b1;
+        assign MemWrite_o = 1'b0;
+        assign RegWrite_o = 1'b1;
+        assign MemToReg_o = 1'b1;
+		assign flush_o = 1'b0;
 	end
 if(Op_i == 7'b0100011)//sw
 	begin
-		ALUOp_o <= 2'b00;
-        ALUSrc_o <= 1'b1;
-        Branch_o <= 1'b0;
-        MemRead_o <= 1'b0;
-        MemWrite_o <= 1'b1;
-        RegWrite_o <= 1'b0;
-        MemToReg_o <= 1'b0;//don't care
+		assign ALUOp_o = 2'b00;
+        assign ALUSrc_o = 1'b1;
+        assign Branch_o = 1'b0;
+        assign MemRead_o = 1'b0;
+        assign MemWrite_o = 1'b1;
+        assign RegWrite_o = 1'b0;
+        assign MemToReg_o = 1'b0;//don't care
+		assign flush_o = 1'b0;
 	end
 if(Op_i == 7'b1100011)//beq
 	begin
-		ALUOp_o <= 2'b01;
-		ALUSrc_o <= 1'b0;
-		Branch_o <= 1'b1;
-		MemRead_o <= 1'b0;
-		MemWrite_o <= 1'b0;
-		RegWrite_o <= 1'b0;
-		MemToReg_o <= 1'b0;//don't care
+		assign ALUOp_o = 2'b01;
+		assign ALUSrc_o = 1'b0;
+		assign Branch_o = 1'b1;
+		assign MemRead_o = 1'b0;
+		assign MemWrite_o = 1'b0;
+		assign RegWrite_o = 1'b0;
+		assign MemToReg_o = 1'b0;//don't care
+		assign flush_o = 1'b1;
 	end
 //assign ALUOp_o  = (Op_i == 7'b0110011) ? 2'b10 : 2'b00; // R-type or add/i
 //assign ALUSrc_o  = (Op_i == 7'b0110011) ? 0 : 1; // R-type or addi
