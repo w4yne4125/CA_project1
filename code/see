@@ -1,0 +1,256 @@
+1c1
+< cycle =           0, Start = 1, Stall =           0, Flush =           0
+---
+> cycle =           0, Start = 1, Stall = 0, Flush = 0
+22c22
+< cycle =           1, Start = 1, Stall =           0, Flush =           0
+---
+> cycle =           1, Start = 1, Stall = 0, Flush = 0
+43c43
+< cycle =           2, Start = 1, Stall =           0, Flush =           0
+---
+> cycle =           2, Start = 1, Stall = 0, Flush = 0
+64c64
+< cycle =           3, Start = 1, Stall =           0, Flush =           0
+---
+> cycle =           3, Start = 1, Stall = 0, Flush = 0
+85c85
+< cycle =           4, Start = 1, Stall =           0, Flush =           0
+---
+> cycle =           4, Start = 1, Stall = 0, Flush = 0
+106c106
+< cycle =           5, Start = 1, Stall =           0, Flush =           0
+---
+> cycle =           5, Start = 1, Stall = 0, Flush = 0
+127c127
+< cycle =           6, Start = 1, Stall =           0, Flush =           0
+---
+> cycle =           6, Start = 1, Stall = 0, Flush = 0
+148c148
+< cycle =           7, Start = 1, Stall =           1, Flush =           0
+---
+> cycle =           7, Start = 1, Stall = 1, Flush = 0
+169c169
+< cycle =           8, Start = 1, Stall =           1, Flush =           0
+---
+> cycle =           8, Start = 1, Stall = 1, Flush = 0
+190c190
+< cycle =           9, Start = 1, Stall =           1, Flush =           0
+---
+> cycle =           9, Start = 1, Stall = 1, Flush = 0
+211c211
+< cycle =          10, Start = 1, Stall =           1, Flush =           0
+---
+> cycle =          10, Start = 1, Stall = 1, Flush = 0
+232c232
+< cycle =          11, Start = 1, Stall =           1, Flush =           0
+---
+> cycle =          11, Start = 1, Stall = 1, Flush = 0
+253c253
+< cycle =          12, Start = 1, Stall =           1, Flush =           0
+---
+> cycle =          12, Start = 1, Stall = 1, Flush = 0
+274c274
+< cycle =          13, Start = 1, Stall =           1, Flush =           0
+---
+> cycle =          13, Start = 1, Stall = 1, Flush = 0
+295c295
+< cycle =          14, Start = 1, Stall =           1, Flush =           0
+---
+> cycle =          14, Start = 1, Stall = 1, Flush = 0
+316c316
+< cycle =          15, Start = 1, Stall =           1, Flush =           1
+---
+> cycle =          15, Start = 1, Stall = 1, Flush = 1
+337c337
+< cycle =          16, Start = 1, Stall =           1, Flush =           1
+---
+> cycle =          16, Start = 1, Stall = 1, Flush = 1
+358c358
+< cycle =          17, Start = 1, Stall =           1, Flush =           1
+---
+> cycle =          17, Start = 1, Stall = 1, Flush = 1
+379c379
+< cycle =          18, Start = 1, Stall =           1, Flush =           1
+---
+> cycle =          18, Start = 1, Stall = 1, Flush = 1
+400c400
+< cycle =          19, Start = 1, Stall =           1, Flush =           1
+---
+> cycle =          19, Start = 1, Stall = 1, Flush = 1
+421c421
+< cycle =          20, Start = 1, Stall =           1, Flush =           1
+---
+> cycle =          20, Start = 1, Stall = 1, Flush = 1
+442c442
+< cycle =          21, Start = 1, Stall =           1, Flush =           1
+---
+> cycle =          21, Start = 1, Stall = 1, Flush = 1
+463c463
+< cycle =          22, Start = 1, Stall =           1, Flush =           1
+---
+> cycle =          22, Start = 1, Stall = 1, Flush = 1
+484c484
+< cycle =          23, Start = 1, Stall =           1, Flush =           2
+---
+> cycle =          23, Start = 1, Stall = 1, Flush = 2
+505c505
+< cycle =          24, Start = 1, Stall =           1, Flush =           2
+---
+> cycle =          24, Start = 1, Stall = 1, Flush = 2
+526c526
+< cycle =          25, Start = 1, Stall =           1, Flush =           2
+---
+> cycle =          25, Start = 1, Stall = 1, Flush = 2
+547c547
+< cycle =          26, Start = 1, Stall =           1, Flush =           2
+---
+> cycle =          26, Start = 1, Stall = 1, Flush = 2
+568c568
+< cycle =          27, Start = 1, Stall =           1, Flush =           2
+---
+> cycle =          27, Start = 1, Stall = 1, Flush = 2
+589c589
+< cycle =          28, Start = 1, Stall =           1, Flush =           2
+---
+> cycle =          28, Start = 1, Stall = 1, Flush = 2
+610c610
+< cycle =          29, Start = 1, Stall =           1, Flush =           2
+---
+> cycle =          29, Start = 1, Stall = 1, Flush = 2
+631c631
+< cycle =          30, Start = 1, Stall =           1, Flush =           2
+---
+> cycle =          30, Start = 1, Stall = 1, Flush = 2
+652c652
+< cycle =          31, Start = 1, Stall =           1, Flush =           3
+---
+> cycle =          31, Start = 1, Stall = 1, Flush = 3
+673c673
+< cycle =          32, Start = 1, Stall =           1, Flush =           3
+---
+> cycle =          32, Start = 1, Stall = 1, Flush = 3
+694c694
+< cycle =          33, Start = 1, Stall =           1, Flush =           3
+---
+> cycle =          33, Start = 1, Stall = 1, Flush = 3
+715c715
+< cycle =          34, Start = 1, Stall =           1, Flush =           3
+---
+> cycle =          34, Start = 1, Stall = 1, Flush = 3
+736c736
+< cycle =          35, Start = 1, Stall =           1, Flush =           3
+---
+> cycle =          35, Start = 1, Stall = 1, Flush = 3
+757c757
+< cycle =          36, Start = 1, Stall =           1, Flush =           3
+---
+> cycle =          36, Start = 1, Stall = 1, Flush = 3
+778c778
+< cycle =          37, Start = 1, Stall =           1, Flush =           3
+---
+> cycle =          37, Start = 1, Stall = 1, Flush = 3
+799c799
+< cycle =          38, Start = 1, Stall =           1, Flush =           3
+---
+> cycle =          38, Start = 1, Stall = 1, Flush = 3
+820c820
+< cycle =          39, Start = 1, Stall =           1, Flush =           4
+---
+> cycle =          39, Start = 1, Stall = 1, Flush = 4
+841c841
+< cycle =          40, Start = 1, Stall =           1, Flush =           4
+---
+> cycle =          40, Start = 1, Stall = 1, Flush = 4
+862c862
+< cycle =          41, Start = 1, Stall =           1, Flush =           4
+---
+> cycle =          41, Start = 1, Stall = 1, Flush = 4
+883c883
+< cycle =          42, Start = 1, Stall =           1, Flush =           4
+---
+> cycle =          42, Start = 1, Stall = 1, Flush = 4
+904c904
+< cycle =          43, Start = 1, Stall =           1, Flush =           4
+---
+> cycle =          43, Start = 1, Stall = 1, Flush = 4
+925c925
+< cycle =          44, Start = 1, Stall =           1, Flush =           4
+---
+> cycle =          44, Start = 1, Stall = 1, Flush = 4
+946c946
+< cycle =          45, Start = 1, Stall =           1, Flush =           4
+---
+> cycle =          45, Start = 1, Stall = 1, Flush = 4
+967c967
+< cycle =          46, Start = 1, Stall =           1, Flush =           5
+---
+> cycle =          46, Start = 1, Stall = 1, Flush = 5
+988c988
+< cycle =          47, Start = 1, Stall =           1, Flush =           5
+---
+> cycle =          47, Start = 1, Stall = 1, Flush = 5
+1009c1009
+< cycle =          48, Start = 1, Stall =           1, Flush =           5
+---
+> cycle =          48, Start = 1, Stall = 1, Flush = 5
+1030c1030
+< cycle =          49, Start = 1, Stall =           1, Flush =           5
+---
+> cycle =          49, Start = 1, Stall = 1, Flush = 5
+1051c1051
+< cycle =          50, Start = 1, Stall =           1, Flush =           5
+---
+> cycle =          50, Start = 1, Stall = 1, Flush = 5
+1072c1072
+< cycle =          51, Start = 1, Stall =           1, Flush =           5
+---
+> cycle =          51, Start = 1, Stall = 1, Flush = 5
+1093c1093
+< cycle =          52, Start = 1, Stall =           1, Flush =           5
+---
+> cycle =          52, Start = 1, Stall = 1, Flush = 5
+1114c1114
+< cycle =          53, Start = 1, Stall =           1, Flush =           5
+---
+> cycle =          53, Start = 1, Stall = 1, Flush = 5
+1135c1135
+< cycle =          54, Start = 1, Stall =           1, Flush =           5
+---
+> cycle =          54, Start = 1, Stall = 1, Flush = 5
+1156c1156
+< cycle =          55, Start = 1, Stall =           1, Flush =           5
+---
+> cycle =          55, Start = 1, Stall = 1, Flush = 5
+1177c1177
+< cycle =          56, Start = 1, Stall =           1, Flush =           5
+---
+> cycle =          56, Start = 1, Stall = 1, Flush = 5
+1198c1198
+< cycle =          57, Start = 1, Stall =           1, Flush =           5
+---
+> cycle =          57, Start = 1, Stall = 1, Flush = 5
+1219c1219
+< cycle =          58, Start = 1, Stall =           1, Flush =           5
+---
+> cycle =          58, Start = 1, Stall = 1, Flush = 5
+1240c1240
+< cycle =          59, Start = 1, Stall =           1, Flush =           5
+---
+> cycle =          59, Start = 1, Stall = 1, Flush = 5
+1261c1261
+< cycle =          60, Start = 1, Stall =           1, Flush =           5
+---
+> cycle =          60, Start = 1, Stall = 1, Flush = 5
+1282c1282
+< cycle =          61, Start = 1, Stall =           1, Flush =           5
+---
+> cycle =          61, Start = 1, Stall = 1, Flush = 5
+1303c1303
+< cycle =          62, Start = 1, Stall =           1, Flush =           5
+---
+> cycle =          62, Start = 1, Stall = 1, Flush = 5
+1324c1324
+< cycle =          63, Start = 1, Stall =           1, Flush =           5
+---
+> cycle =          63, Start = 1, Stall = 1, Flush = 5

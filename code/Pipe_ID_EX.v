@@ -56,7 +56,7 @@ output reg [1:0] ALUOp_o;//
 
 
 always @(posedge clk_i or negedge rst_i)begin
-    if (!rst_i) begin
+    if (~rst_i) begin
     	RSdata_o <= 0;
     	RTdata_o <= 0;
         immed_o  <= 0;	
@@ -81,7 +81,7 @@ always @(posedge clk_i or negedge rst_i)begin
     	RSaddr_o <= RSaddr_i;
     	RTaddr_o <= RTaddr_i;
     	RDaddr_o <= RDaddr_i;
-    	ALUSrc_o <= ALUSrc_o;
+    	ALUSrc_o <= ALUSrc_i;
        
     	MemToReg_o <= MemToReg_i;
         RegWrite_o <= RegWrite_i;

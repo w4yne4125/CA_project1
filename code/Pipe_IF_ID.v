@@ -19,7 +19,7 @@ output reg [31:0] pc_o;
 output reg [31:0] instruction_o;
 
 always @(posedge clk_i or negedge rst_i) begin
-    if (!rst_i) begin
+    if (~rst_i) begin
         instruction_o <= 0;
         pc_o <= 0;
     end

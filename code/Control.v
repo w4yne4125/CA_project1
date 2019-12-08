@@ -35,7 +35,8 @@ assign MemToReg_o = (Op_i == `lw);
 assign RegWrite_o = (Op_i == `Rtype || Op_i == `addi || Op_i == `lw);
 assign MemWrite_o = (Op_i == `sw);
 assign MemRead_o  = (Op_i == `lw);
-assign Branch_o   = (Op_i == `beq);
+assign Branch_o   = (Op_i == `beq && RegEqual_i);
+assign flush_o    = (Op_i == `beq && RegEqual_i);
 assign ALUOp_o    = (Op_i == `Rtype) ? 2'b10 :
                     (Op_i == `addi)  ? 2'b00 :
                     (Op_i == `lw)    ? 2'b00 :

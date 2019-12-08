@@ -39,7 +39,7 @@ output reg       MemRead_o;
 
 
 always @(posedge clk_i or negedge rst_i) begin
-    if( !rst_i ) begin
+    if( ~rst_i ) begin
         ALU_Res_o <= 0;
         Write_Data_o <= 0;
         RdAddr_o <= 0;

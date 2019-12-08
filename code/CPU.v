@@ -84,21 +84,10 @@ Immgen Immgen(
 
 MuxControl MUX_IDEX ( // care
     .stall_i    (Hazard_Detection_Unit.stall_o),
-    .MemToReg_i (Control.MemToReg_o),
     .RegWrite_i (Control.RegWrite_o),
     .MemWrite_i (Control.MemWrite_o),
-    .MemRead_i  (Control.MemRead_o),
-
-    .Branch_i   (Control.Branch_o),
-    .ALUSrc_i   (Control.ALUSrc_o),
-    .ALUOp_i    (Control.ALUOp_o),
-    .ALUSrc_o   (),
-    .MemToReg_o (),
     .RegWrite_o (),
-    .MemWrite_o (),
-    .MemRead_o  (),
-    .Branch_o   (),
-    .ALUOp_o    ()
+    .MemWrite_o ()
 );
 
 Register_Equal Register_Equal(
@@ -122,8 +111,8 @@ Adder Add_Branch(
 
 Registers Registers(
     .clk_i      (clk_i),
-    .RS1addr_i   (Instruction_Memory.instr_o[19:15]),
-    .RS2addr_i   (Instruction_Memory.instr_o[24:20]),
+    .RS1addr_i   (Pipe_IF_ID.instruction_o[19:15]),
+    .RS2addr_i   (Pipe_IF_ID.instruction_o[24:20]),
     .RDaddr_i   (Pipe_MEM_WB.RdAddr_o), 
     .RDdata_i   (MUX_WB.data_o),
     .RegWrite_i (Pipe_MEM_WB.RegWrite_o), 
@@ -151,15 +140,15 @@ Pipe_ID_EX Pipe_ID_EX(
     .immed_o        (),
 
     // Control Outputs
-    .instruction_i (Pipe_ID_EX.instruction_o),
+    .instruction_i (Pipe_IF_ID.instruction_o),
     .instruction_o (),
 
-    .ALUSrc_i        (MUX_IDEX.ALUSrc_o),
-    .MemToReg_i      (MUX_IDEX.MemToReg_o),
+    .ALUSrc_i        (Control.ALUSrc_o),
+    .MemToReg_i      (Control.MemToReg_o),
     .RegWrite_i      (MUX_IDEX.RegWrite_o),
     .MemWrite_i      (MUX_IDEX.MemWrite_o),
-    .MemRead_i       (MUX_IDEX.MemRead_i),
-    .ALUOp_i         (MUX_IDEX.ALUOp_o),
+    .MemRead_i       (Control.MemRead_o),
+    .ALUOp_i         (Control.ALUOp_o),
     .ALUSrc_o        (),
     .MemToReg_o      (),
     .RegWrite_o      (),
