@@ -230,7 +230,7 @@ Pipe_EX_MEM Pipe_EX_MEM(
     .MemToReg_o     (),
     .RegWrite_o     (),
     .MemWrite_o     (),
-    .MemRead_o      (),
+    .MemRead_o      ()
 );
 
 // ------------------MEM Stage Start----------------
