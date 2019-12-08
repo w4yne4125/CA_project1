@@ -35,6 +35,32 @@ initial begin
     end
 
     // TODO: initialize pipeline registers
+    CPU.Pipe_IF_ID.pc_o = 32'b0;
+    CPU.Pipe_IF_ID.instrction_o = 32'b0;
+    CPU.Pipe_ID_EXE.RSdata_o = 32'b0;
+    CPU.Pipe_ID_EXE.RTdata_o = 32'b0;
+    CPU.Pipe_ID_EXE.RSaddr_o = 5'b0;
+    CPU.Pipe_ID_EXE.RTaddr_o = 5'b0;
+    CPU.Pipe_ID_EXE.RDaddr_o = 5'b0;
+    CPU.Pipe_ID_EXE.immed_o  = 32'b0;
+    CPU.Pipe_ID_EXE.MemToReg_o = 1'b0;
+    CPU.Pipe_ID_EXE.RegWrite_o = 1'b0;
+    CPU.Pipe_ID_EXE.MemWrite_o = 1'b0;
+    CPU.Pipe_ID_EXE.MemRead_o = 1'b0;
+    CPU.Pipe_ID_EXE.ALUOp_o = 2'b0;
+    CPU.Pipe_EX_MEM.ALU_Res_o = 32'b0 ;
+    CPU.Pipe_EX_MEM.Write_Data_o = 32'b0 ;
+    CPU.Pipe_EX_MEM.RdAddr_o = 5'b0 ;
+    CPU.Pipe_EX_MEM.MemToReg_o = 1'b0 ;
+    CPU.Pipe_EX_MEM.RegWrite_o = 1'b0 ;
+    CPU.Pipe_EX_MEM.MemWrite_o = 1'b0 ;
+    CPU.Pipe_EX_MEM.MemRead_o = 1'b0 ;
+    CPU.Pipe_MEM_WB.ALU_Res_o = 32'b0 ;
+    CPU.Pipe_MEM_WB.Read_Data_o = 32'b0 ;
+    CPU.Pipe_MEM_WB.Rd_Addr_o = 5'b0 ;
+    CPU.Pipe_MEM_WB.MemToReg_o = 1'b0 ;
+    CPU.Pipe_MEM_WB.RegWrite_o = 1'b0 ;
+    
     
     // Load instructions into instruction memory
     $readmemb("../testdata/instruction.txt", CPU.Instruction_Memory.memory);
@@ -61,9 +87,9 @@ always@(posedge Clk) begin
     if(counter == 30)    // stop after 30 cycles
         $finish;
 
-    // TODO: put in your own signal to count stall and flush
-    // if(CPU.HazardDetection.Stall_o == 1 && CPU.Control.Branch_o == 0)stall = stall + 1;
-    // if(CPU.HazardDetection.Flush_o == 1)flush = flush + 1;  
+
+    if(CPU.Hazard_Detection_Unit.stall_o == 1 && CPU.Control.Branch_o == 0)stall = stall + 1;
+    if(CPU.Control.flush_o == 1) flush = flush + 1;  
    
 
     // print PC

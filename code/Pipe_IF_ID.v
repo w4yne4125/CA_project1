@@ -15,8 +15,8 @@ input flush_i;
 input stall_i;
 input [31:0] pc_i;
 input [31:0] instruction_i;
-output reg [31:0] pc_i;
-output reg [31:0] instruction_i;
+output reg [31:0] pc_o;
+output reg [31:0] instruction_o;
 
 always @(posedge clk_i or negedge rst_i) begin
     if (!rst_i) begin

@@ -24,7 +24,7 @@ input  RegWrite_i;
 
 output reg [31:0] ALU_Res_o;
 output reg [31:0] Read_Data_o;
-output reg [4:0] Rd_Addr_o
+output reg [4:0] Rd_Addr_o;
 output reg MemToReg_o;
 output reg RegWrite_o;
 

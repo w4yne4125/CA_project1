@@ -1,19 +1,19 @@
 module MuxControl( 
-    .stall_i    (Hazard_Detection_Unit.stall_o),
-    .ALUSrc_i   (Control.ALUSrc_o),
-    .MemToReg_i (Control.MemToReg_o),
-    .RegWrite_i (Control.RegWrite_o),
-    .MemWrite_i (Control.MemWrite_o),
-    .MemRead_i  (Control.MemRead_o),
-    .Branch_i   (Control.Branch_o),
-    .ALUOp_i    (Control.ALUOp_o),
-    .ALUSrc_o   (),
-    .MemToReg_o (),
-    .RegWrite_o (),
-    .MemWrite_o (),
-    .MemRead_o  (),
-    .Branch_o   (),
-    .ALUOp_o    ()
+    stall_i,   
+    ALUSrc_i,  
+    MemToReg_i,
+    RegWrite_i,
+    MemWrite_i,
+    MemRead_i ,
+    Branch_i  ,
+    ALUOp_i   ,
+    ALUSrc_o  ,
+    MemToReg_o,
+    RegWrite_o,
+    MemWrite_o,
+    MemRead_o ,
+    Branch_o  ,
+    ALUOp_o   
 );
 
 input stall_i;

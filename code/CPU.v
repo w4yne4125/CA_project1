@@ -162,7 +162,7 @@ Pipe_ID_EX Pipe_ID_EX(
 
 // ------------------EXE Stage Start----------------
 
-Mux32_3 MUX_ALU1(
+MUX32_3 MUX_ALU1(
     .data0_i    (Pipe_ID_EX.RSdata_o),
     .data1_i    (Pipe_EX_MEM.ALU_Res_o),
     .data2_i    (MUX_WB.data_o),
@@ -170,7 +170,7 @@ Mux32_3 MUX_ALU1(
     .data_o     ()
 );
 
-Mux32_3 MUX_ALU2(
+MUX32_3 MUX_ALU2(
     .data0_i    (Pipe_ID_EX.RTdata_o),
     .data1_i    (Pipe_EX_MEM.ALU_Res_o),
     .data2_i    (MUX_WB.data_o),
@@ -178,7 +178,7 @@ Mux32_3 MUX_ALU2(
     .data_o     ()
 );
 
-Mux32 MUX_ALUSrc(
+MUX32 MUX_ALUSrc(
     .data0_i    (MUX_ALU2.data_o),
     .data1_i    (Pipe_ID_EX.Immgen_o),
     .select_i   (Pipe_ID_EX.ALUSrc_o),
@@ -264,7 +264,7 @@ Pipe_MEM_WB Pipe_MEM_WB(
 
 // ------------------WB Stage Start----------------
 
-Mux32 MUX_WB(
+MUX32 MUX_WB(
     .data0_i    (Pipe_MEM_WB.ALU_Res_o),
     .data1_i    (Pipe_MEM_WB.Read_Data_o),
     .select_i   (Pipe_MEM_WB.MemToReg_o),

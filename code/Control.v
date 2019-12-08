@@ -23,63 +23,56 @@ output RegWrite_o;
 output Branch_o;
 output flush_o;
 
-if(Op_i == 7'b0110011)//Rformat
-	begin
-		assign ALUOp_o = 2'b10;
-		assign LUSrc_o = 1'b0;
-		assign Branch_o = 1'b0;
-		assign MemRead_o = 1'b0;
-		assign MemWrite_o = 1'b0;
-		assign RegWrite_o = 1'b1;
-		assign MemToReg_o = 1'b0;
-		assign flush_o = 1'b0;
-	end
-if(Op_i == 7'b0010011)//addi
-	begin
-		assign ALUOp_o = 2'b00;
-		assign ALUSrc_o = 1'b1;
-		assign Branch_o = 1'b0;
-		assign MemRead_o = 1'b0;
-		assign MemWrite_o = 1'b0;
-		assign RegWrite_o = 1'b1;
-		assign MemToReg_o = 1'b0;
-		assign flush_o = 1'b0;
-	end
-if(Op_i == 7'b0000011)//lw
-	begin
-		assign ALUOp_o = 2'b00;
-        assign ALUSrc_o = 1'b1;
-        assign Branch_o = 1'b0;
-        assign MemRead_o = 1'b1;
-        assign MemWrite_o = 1'b0;
-        assign RegWrite_o = 1'b1;
-        assign MemToReg_o = 1'b1;
-		assign flush_o = 1'b0;
-	end
-if(Op_i == 7'b0100011)//sw
-	begin
-		assign ALUOp_o = 2'b00;
-        assign ALUSrc_o = 1'b1;
-        assign Branch_o = 1'b0;
-        assign MemRead_o = 1'b0;
-        assign MemWrite_o = 1'b1;
-        assign RegWrite_o = 1'b0;
-        assign MemToReg_o = 1'b0;//don't care
-		assign flush_o = 1'b0;
-	end
-if(Op_i == 7'b1100011)//beq
-	begin
-		assign ALUOp_o = 2'b01;
-		assign ALUSrc_o = 1'b0;
-		assign Branch_o = 1'b1;
-		assign MemRead_o = 1'b0;
-		assign MemWrite_o = 1'b0;
-		assign RegWrite_o = 1'b0;
-		assign MemToReg_o = 1'b0;//don't care
-		assign flush_o = 1'b1;
-	end
-//assign ALUOp_o  = (Op_i == 7'b0110011) ? 2'b10 : 2'b00; // R-type or add/i
-//assign ALUSrc_o  = (Op_i == 7'b0110011) ? 0 : 1; // R-type or addi
-//assign RegWrite_o = 1; // Since all the instruction we need to do set this value to 1
 
+
+assign ALUOp_o = (Op_i == 7'b0110011) ? 2'b10 :
+                 (Op_i == 7'b0010011) ? 2'b00 : 
+                 (Op_i == 7'b0000011) ? 2'b00 :
+                 (Op_i == 7'b0100011) ? 2'b00 :
+                                        2'b01 ;
+                        
+
+assign ALUSrc_o =(Op_i == 7'b0110011) ? 1'b0 :
+                 (Op_i == 7'b0010011) ? 1'b1 : 
+                 (Op_i == 7'b0000011) ? 1'b1 :
+                 (Op_i == 7'b0100011) ? 1'b1 :
+                                        1'b0 ;
+
+
+assign Branch_o =(Op_i == 7'b0110011) ? 1'b0 :
+                 (Op_i == 7'b0010011) ? 1'b0 : 
+                 (Op_i == 7'b0000011) ? 1'b0 :
+                 (Op_i == 7'b0100011) ? 1'b0 :
+                                        1'b1 ;
+
+assign MemRead_o = (Op_i == 7'b0110011) ? 1'b0 :
+                   (Op_i == 7'b0010011) ? 1'b0 : 
+                   (Op_i == 7'b0000011) ? 1'b1 :
+                   (Op_i == 7'b0100011) ? 1'b0 :
+                                          1'b0 ;
+
+assign MemWrite_o = (Op_i == 7'b0110011) ? 1'b0 :
+                    (Op_i == 7'b0010011) ? 1'b0 : 
+                    (Op_i == 7'b0000011) ? 1'b0 :
+                    (Op_i == 7'b0100011) ? 1'b1 :
+                                           1'b0 ;
+
+
+assign RegWrite_o = (Op_i == 7'b0110011) ? 1'b1 :
+                    (Op_i == 7'b0010011) ? 1'b1 : 
+                    (Op_i == 7'b0000011) ? 1'b1 :
+                    (Op_i == 7'b0100011) ? 1'b0 :
+                                           1'b0 ;
+
+assign MemToReg_o = (Op_i == 7'b0110011) ? 1'b0 :
+                    (Op_i == 7'b0010011) ? 1'b0 : 
+                    (Op_i == 7'b0000011) ? 1'b1 :
+                    (Op_i == 7'b0100011) ? 1'b0 :
+                                           1'b0 ;
+
+assign flush_o =   (Op_i == 7'b0110011) ? 1'b0 :
+                   (Op_i == 7'b0010011) ? 1'b0 : 
+                   (Op_i == 7'b0000011) ? 1'b0 :
+                   (Op_i == 7'b0100011) ? 1'b0 :
+                                          1'b1 ;
 endmodule
