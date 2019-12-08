@@ -15,9 +15,9 @@
 ----------------------------------
 
 - Hazard_Detection_Unit : Hazard_Detection_Unit
-- Control : Control
-- Immgen : Immgen
-- Register_Equal : Register_Equal
+- Control : Control		[need to deal with flush]
+- Immgen : Immgen		[need to check]
+- Register_Equal : Register_Equal[done(?]
 - MUX_IDEX : MUXcontrol
 - Add_Branch : Adder       [done]
 - Registers : Registers
@@ -27,7 +27,7 @@
 
 ----------------------------------
 
-- Pipe_ID_EX : Pipe_ID_EX
+- Pipe_ID_EX : Pipe_ID_EX	[done(?]
 
 ----------------------------------
 
