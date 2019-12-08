@@ -18,6 +18,9 @@ module Pipe_EX_MEM(
     MemWrite_o,
     MemRead_o ,
 );
+
+input clk_i;
+input rst_i;
 input      [31:0] ALU_Res_i;
 output reg [31:0] ALU_Res_o;
 input      [31:0] Write_Data_i;

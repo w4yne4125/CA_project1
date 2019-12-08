@@ -15,10 +15,10 @@ input [4:0] ID_EX_RsAddr_i;
 input [4:0] ID_EX_RtAddr_i;
 input  EX_MEM_RegWrite_i;
 input [4:0] EX_MEM_RdAddr_i;
-input  MEM_WB_Regwrite_i;
+input  MEM_WB_RegWrite_i;
 input [4:0] MEM_WB_RdAddr_i;
-output [2:0] EX_RsOverride_o;
-output [2:0] EX_RdOverride_o;
+output [1:0] EX_RsOverride_o;
+output [1:0] EX_RtOverride_o;
 
 assign EX_RsOverride_o = (EX_MEM_RegWrite_i && (EX_MEM_RdAddr_i != 0) && (EX_MEM_RdAddr_i == ID_EX_RsAddr_i)) ? 2'b10 :
 	                    (MEM_WB_RegWrite_i && !(EX_MEM_RegWrite_i && (EX_MEM_RdAddr_i != 0) && (EX_MEM_RdAddr_i == ID_EX_RsAddr_i)) && (MEM_WB_RdAddr_i == ID_EX_RsAddr_i)) ? 2'b01 :

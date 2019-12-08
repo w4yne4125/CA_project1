@@ -14,6 +14,7 @@ module Control
 
 // Ports
 input [6:0] Op_i;
+input RegEqual_i;
 output MemWrite_o;
 output MemRead_o;
 output MemToReg_o;

@@ -3,6 +3,7 @@
 module TestBench;
 
 reg                Clk;
+reg                Reset;
 reg                Start;
 integer            i, outfile, counter;
 integer            stall, flush;
@@ -11,6 +12,7 @@ always #(`CYCLE_TIME/2) Clk = ~Clk;
 
 CPU CPU(
     .clk_i  (Clk),
+    .rst_i  (Reset),
     .start_i(Start)
 );
   
@@ -34,33 +36,6 @@ initial begin
         CPU.Registers.register[i] = 32'b0;
     end
 
-    // TODO: initialize pipeline registers
-    CPU.Pipe_IF_ID.pc_o = 32'b0;
-    CPU.Pipe_IF_ID.instrction_o = 32'b0;
-    CPU.Pipe_ID_EXE.RSdata_o = 32'b0;
-    CPU.Pipe_ID_EXE.RTdata_o = 32'b0;
-    CPU.Pipe_ID_EXE.RSaddr_o = 5'b0;
-    CPU.Pipe_ID_EXE.RTaddr_o = 5'b0;
-    CPU.Pipe_ID_EXE.RDaddr_o = 5'b0;
-    CPU.Pipe_ID_EXE.immed_o  = 32'b0;
-    CPU.Pipe_ID_EXE.MemToReg_o = 1'b0;
-    CPU.Pipe_ID_EXE.RegWrite_o = 1'b0;
-    CPU.Pipe_ID_EXE.MemWrite_o = 1'b0;
-    CPU.Pipe_ID_EXE.MemRead_o = 1'b0;
-    CPU.Pipe_ID_EXE.ALUOp_o = 2'b0;
-    CPU.Pipe_EX_MEM.ALU_Res_o = 32'b0 ;
-    CPU.Pipe_EX_MEM.Write_Data_o = 32'b0 ;
-    CPU.Pipe_EX_MEM.RdAddr_o = 5'b0 ;
-    CPU.Pipe_EX_MEM.MemToReg_o = 1'b0 ;
-    CPU.Pipe_EX_MEM.RegWrite_o = 1'b0 ;
-    CPU.Pipe_EX_MEM.MemWrite_o = 1'b0 ;
-    CPU.Pipe_EX_MEM.MemRead_o = 1'b0 ;
-    CPU.Pipe_MEM_WB.ALU_Res_o = 32'b0 ;
-    CPU.Pipe_MEM_WB.Read_Data_o = 32'b0 ;
-    CPU.Pipe_MEM_WB.Rd_Addr_o = 5'b0 ;
-    CPU.Pipe_MEM_WB.MemToReg_o = 1'b0 ;
-    CPU.Pipe_MEM_WB.RegWrite_o = 1'b0 ;
-    
     
     // Load instructions into instruction memory
     $readmemb("../testdata/instruction.txt", CPU.Instruction_Memory.memory);
@@ -72,11 +47,11 @@ initial begin
     CPU.Data_Memory.memory[0] = 8'h5;       // n = 5 for example
     
     Clk = 1;
-    //Reset = 0;
+    // Reset = 0;
     Start = 0;
     
     #(`CYCLE_TIME/4) 
-    //Reset = 1;
+    // Reset = 1;
     Start = 1;
         
     

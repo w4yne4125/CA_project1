@@ -15,6 +15,8 @@ module Pipe_ID_EX(
 	immed_i,
 	immed_o,
 
+    instruction_i,
+    instruction_o,
 	//control output
 	ALUSrc_i,
     MemToReg_i,
@@ -31,7 +33,7 @@ module Pipe_ID_EX(
 );
 
 input clk_i,rst_i;
-input [31:0] RSdata_i,RTdata_i;
+input [31:0] RSdata_i,RTdata_i, instruction_i;
 input [4:0] RSaddr_i,RTaddr_i,RDaddr_i;
 input [31:0]immed_i;
 input ALUSrc_i;//
@@ -41,7 +43,7 @@ input MemWrite_i;//
 input MemRead_i;//
 input [1:0] ALUOp_i;
 
-output reg [31:0] RSdata_o,RTdata_o;
+output reg [31:0] RSdata_o,RTdata_o, instruction_o;
 output reg [4:0] RSaddr_o,RTaddr_o,RDaddr_o;
 output reg [31:0]immed_o;
 output reg ALUSrc_o;//
@@ -68,6 +70,7 @@ always @(posedge clk_i or negedge rst_i)begin
         MemWrite_o <= 0;
         MemRead_o <= 0;
         ALUOp_o <= 0;
+        instruction_o <= 0;
         
     end
     else begin
@@ -84,6 +87,7 @@ always @(posedge clk_i or negedge rst_i)begin
         MemWrite_o <= MemWrite_i;
         MemRead_o <= MemRead_i;
         ALUOp_o <= ALUOp_i;
+        instruction_o <= instruction_i;
     end
 
 end

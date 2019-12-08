@@ -60,8 +60,8 @@ Pipe_IF_ID Pipe_IF_ID(
 Hazard_Detection_Unit Hazard_Detection_Unit( // CARE
     .ID_EX_MemRead_i    (Pipe_ID_EX.MemRead_o),
     .IF_ID_RsAddr_i     (Pipe_IF_ID.instruction_o[19:15]),
-    .IF_ID_RtAddr_i     (Pipe_IF_ID_instruction_o[24:20]),
-    .ID_EX_RdAddr_i     (Pipe_ID_EX_instruction_o[11:7]),
+    .IF_ID_RtAddr_i     (Pipe_IF_ID.instruction_o[24:20]),
+    .ID_EX_RdAddr_i     (Pipe_ID_EX.instruction_o[11:7]),
     .stall_o            ()
 );
 
@@ -103,8 +103,8 @@ MuxControl MUX_IDEX ( // care
 );
 
 Register_Equal Register_Equal(
-    .RSData_i   (Registers.RSdata_o),
-    .RTData_i   (Registers.RTdata_o),
+    .RSData_i   (Registers.RS1data_o),
+    .RTData_i   (Registers.RS2data_o),
     .Equal_o    ()
 );
 
@@ -117,13 +117,13 @@ Adder Add_Branch(
 
 Registers Registers(
     .clk_i      (clk_i),
-    .RSaddr_i   (Instruction_Memory.instr_o[19:15]),
-    .RTaddr_i   (Instruction_Memory.instr_o[24:20]),
+    .RS1addr_i   (Instruction_Memory.instr_o[19:15]),
+    .RS2addr_i   (Instruction_Memory.instr_o[24:20]),
     .RDaddr_i   (Pipe_MEM_WB.RdAddr_o), 
     .RDdata_i   (MUX_WB.data_o),
     .RegWrite_i (Pipe_MEM_WB.RegWrite_o), 
-    .RSdata_o   (), 
-    .RTdata_o   () 
+    .RS1data_o   (), 
+    .RS2data_o   () 
 );
 
 // ------------------ID Stage End----------------
@@ -132,13 +132,13 @@ Pipe_ID_EX Pipe_ID_EX(
     .clk_i          (clk_i),
     .rst_i          (rst_i),
 
-    .RSdata_i       (Registers.RSdata_o),
-    .RTdata_i       (Registers.RTdata_o),
+    .RSdata_i       (Registers.RS1data_o),
+    .RTdata_i       (Registers.RS2data_o),
     .RSdata_o       (),
     .RTdata_o       (),
-    .RSaddr_i       (Piep_IF_ID.instruction_o[19:15]),
-    .RTaddr_i       (Piep_IF_ID.instruction_o[24:20]),
-    .RDaddr_i       (Piep_IF_ID.instruction_o[11:7 ]),
+    .RSaddr_i       (Pipe_IF_ID.instruction_o[19:15]),
+    .RTaddr_i       (Pipe_IF_ID.instruction_o[24:20]),
+    .RDaddr_i       (Pipe_IF_ID.instruction_o[11:7 ]),
     .RSaddr_o       (),
     .RTaddr_o       (),
     .RDaddr_o       (),
@@ -146,6 +146,9 @@ Pipe_ID_EX Pipe_ID_EX(
     .immed_o        (),
 
     // Control Outputs
+    .instruction_i (Pipe_ID_EX.instruction_o),
+    .instruction_o (),
+
     .ALUSrc_i        (MUX_IDEX.ALUSrc_o),
     .MemToReg_i      (MUX_IDEX.MemToReg_o),
     .RegWrite_i      (MUX_IDEX.RegWrite_o),
@@ -179,8 +182,8 @@ MUX32_3 MUX_ALU2(
 );
 
 MUX32 MUX_ALUSrc(
-    .data0_i    (MUX_ALU2.data_o),
-    .data1_i    (Pipe_ID_EX.Immgen_o),
+    .data1_i    (MUX_ALU2.data_o),
+    .data2_i    (Pipe_ID_EX.immed_o),
     .select_i   (Pipe_ID_EX.ALUSrc_o),
     .data_o     ()
 );
@@ -265,8 +268,8 @@ Pipe_MEM_WB Pipe_MEM_WB(
 // ------------------WB Stage Start----------------
 
 MUX32 MUX_WB(
-    .data0_i    (Pipe_MEM_WB.ALU_Res_o),
-    .data1_i    (Pipe_MEM_WB.Read_Data_o),
+    .data1_i    (Pipe_MEM_WB.ALU_Res_o),
+    .data2_i    (Pipe_MEM_WB.Read_Data_o),
     .select_i   (Pipe_MEM_WB.MemToReg_o),
     .data_o     ()
 );

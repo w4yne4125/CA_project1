@@ -14,13 +14,13 @@
 
 ----------------------------------
 
-- Hazard_Detection_Unit : Hazard_Detection_Unit [done]
+- Hazard_Detection_Unit : Hazard_Detection_Unit
 - Control : Control		[need to deal with flush]
 - Immgen : Immgen		[need to check]
 - Register_Equal : Register_Equal[done(?]
-- MUX_IDEX : MUXcontrol
+- MUX_IDEX : MUXcontrol    [done]
 - Add_Branch : Adder       [done]
-- Registers : Registers
+- Registers : Registers    [done] 
 
 -------------分配線-------------------
 

@@ -1,3 +1,3 @@
 make
 echo "finish" | vvp cpu.out 
-diff output.txt reff.txt
+diff ../testdata/output.txt ../testdata/output_ref.txt
