@@ -11,6 +11,7 @@ input [1:0] ALUOp_i;
 
 output [2:0] ALUCtrl_o;
 
+wire [4:0] cut;
 assign cut = {funct_i[30], funct_i[25], funct_i[14:12]};
 
 assign ALUCtrl_o = (ALUOp_i != 2'b10) ? 3'b000 :   // Addi
