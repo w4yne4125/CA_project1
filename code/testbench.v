@@ -47,18 +47,17 @@ initial begin
     CPU.Data_Memory.memory[0] = 8'h5;       // n = 5 for example
     
     Clk = 1;
-    // Reset = 0;
+    Reset = 0;
     Start = 0;
     
     #(`CYCLE_TIME/4) 
-    // Reset = 1;
+    Reset = 1;
     Start = 1;
         
     
 end
   
 always@(posedge Clk) begin
-    // TODO: change # of cycles as you need
     if(counter == 30)    // stop after 30 cycles
         $finish;
 

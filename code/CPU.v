@@ -23,7 +23,7 @@ PC PC(
     .clk_i      (clk_i),
     .rst_i      (rst_i),
     .start_i    (start_i),
-    .stall_i    (Hazard_Detection_Unit.stall_o), 
+    .PCWrite_i  (!Hazard_Detection_Unit.stall_o), 
     .pc_i       (MUX_PC.data_o),
     .pc_o       ()
 );
@@ -108,9 +108,15 @@ Register_Equal Register_Equal(
     .Equal_o    ()
 );
 
+
+Shift Shift_Imm(
+    .data_i (Immgen.data_o),
+    .data_o ()
+);
+
 Adder Add_Branch( 
     .data1_in   (Pipe_IF_ID.pc_o),
-    .data2_in   (Immgen.data_o), // not shift yet
+    .data2_in   (Shift_Imm.data_o), // not shift yet
     .data_o     ()
 );
 
