@@ -1,0 +1,252 @@
+module CPU
+(
+    clk_i, 
+    start_i
+);
+
+// Ports
+
+input         clk_i;
+input         start_i;
+
+// IF stage
+
+MUX2 MUX_PC(
+    .data1_i        (Add_PC.data_o),
+    .data2_i        (Add_Branch.data_o),
+    .select_i       (Control.Branch_o),
+    .data_o         ()
+);
+
+PC PC(
+    .clk_i          (clk_i),
+    .rst_i          (start_i),
+    .start_i        (start_i),
+    .PCWrite_i      (!Hazard_Detection.stall_o),
+    .pc_i           (MUX_PC.data_o),
+    .pc_o           ()
+);
+
+Adder Add_PC(
+    .data1_i        (PC.pc_o),
+    .data2_i        (4),
+    .data_o         ()
+);
+
+Instruction_Memory Instruction_Memory(
+    .addr_i         (PC.pc_o),
+    .instr_o        ()
+);
+
+// ID Stage
+
+IFID_Pipeline IFID_Pipeline(
+    .clk_i          (clk_i),
+    .start_i        (start_i),
+    .flush_i        (Control.flush_o),
+    .pc_i           (PC.pc_o),
+    .instr_i        (Instruction_Memory.instr_o),
+    .IFIDWrite_i    (!Hazard_Detection.stall_o),
+    .pc_o           (),
+    .instr_o        (),
+    .RS1addr_o      (),
+    .RS2addr_o      (),
+    .RDaddr_o       (),
+    .funct_o        ()    
+);
+
+Hazard_Detection Hazard_Detection(
+    .IDEXMemRead_i  (IDEX_Pipeline.MemRead_o),
+    .IDEXRDaddr_i   (IDEX_Pipeline.RDaddr_o),
+    .IFIDRS1addr_i  (IFID_Pipeline.RS1addr_o),
+    .IFIDRS2addr_i  (IFID_Pipeline.RS2addr_o),
+    .stall_o        ()
+);
+
+Control Control(
+    .op_i           (IFID_Pipeline.instr_o[6:0]),
+    .Equal_i        (Register_Equal.Equal_o),
+    .ALUSrc_o       (),
+    .ALUOp_o        (),
+    .MemRead_o      (),
+    .MemWrite_o     (),
+    .Branch_o       (),
+    .MemtoReg_o     (),
+    .RegWrite_o     (),
+    .flush_o        ()
+);
+
+MUX_Control MUX_Control(
+    .select_i       (Hazard_Detection.stall_o),
+    .MemWrite_i     (Control.MemWrite_o),
+    .RegWrite_i     (Control.RegWrite_o),
+    .MemWrite_o     (),
+    .RegWrite_o     ()
+);
+
+Imm_Gen Imm_Gen(
+    .instr_i        (IFID_Pipeline.instr_o),
+    .imm_o          ()
+);
+
+Adder Add_Branch(
+    .data1_i        (Imm_Gen.imm_o),
+    .data2_i        (IFID_Pipeline.pc_o),
+    .data_o         ()
+);
+
+Registers Registers(
+    .clk_i          (clk_i),
+    .RS1addr_i      (IFID_Pipeline.RS1addr_o),
+    .RS2addr_i      (IFID_Pipeline.RS2addr_o),
+    .RDaddr_i       (MEMWB_Pipeline.RDaddr_o),
+    .RDdata_i       (MUX_WB.data_o),
+    .RegWrite_i     (MEMWB_Pipeline.RegWrite_o),
+    .RS1data_o      (),
+    .RS2data_o      ()
+);
+
+Equal Register_Equal(
+    .RS1data_i      (Registers.RS1data_o),
+    .RS2data_i      (Registers.RS2data_o),
+    .Equal_o        ()
+);
+
+// EX Stage
+
+IDEX_Pipeline IDEX_Pipeline(
+    .clk_i          (clk_i),
+    .start_i        (start_i),
+    .ALUSrc_i       (Control.ALUSrc_o),
+    .ALUOp_i        (Control.ALUOp_o),
+    .MemRead_i      (Control.MemRead_o),
+    .MemWrite_i     (MUX_Control.MemWrite_o),
+    .MemtoReg_i     (Control.MemtoReg_o),
+    .RegWrite_i     (MUX_Control.RegWrite_o),
+    .RS1data_i      (Registers.RS1data_o),
+    .RS2data_i      (Registers.RS2data_o),
+    .imm_i          (Imm_Gen.imm_o),
+    .RS1addr_i      (IFID_Pipeline.RS1addr_o),
+    .RS2addr_i      (IFID_Pipeline.RS2addr_o),
+    .RDaddr_i       (IFID_Pipeline.RDaddr_o),
+    .funct_i        (IFID_Pipeline.funct_o),
+    .ALUSrc_o       (),
+    .ALUOp_o        (),
+    .MemRead_o      (),
+    .MemWrite_o     (),
+    .MemtoReg_o     (),
+    .RegWrite_o     (),
+    .RS1data_o      (),
+    .RS2data_o      (),
+    .imm_o          (),
+    .RS1addr_o      (),
+    .RS2addr_o      (),
+    .RDaddr_o       (),
+    .funct_o        ()
+);
+
+MUX3 MUX_ALU1(
+    .data1_i        (IDEX_Pipeline.RS1data_o),
+    .data2_i        (MUX_WB.data_o),
+    .data3_i        (EXMEM_Pipeline.ALU_o),
+    .select_i       (Forwarding.ForwardA_o),
+    .data_o         ()
+);
+
+MUX3 MUX_ALU2(
+    .data1_i        (IDEX_Pipeline.RS2data_o),
+    .data2_i        (MUX_WB.data_o),
+    .data3_i        (EXMEM_Pipeline.ALU_o),
+    .select_i       (Forwarding.ForwardB_o),
+    .data_o         ()
+);
+
+MUX2 MUX_ALUSrc(
+    .data1_i        (MUX_ALU2.data_o),
+    .data2_i        (IDEX_Pipeline.imm_o),
+    .select_i       (IDEX_Pipeline.ALUSrc_o),
+    .data_o         ()
+);
+
+ALU_Control ALU_Control(
+    .funct_i        (IDEX_Pipeline.funct_o),
+    .ALUOp_i        (IDEX_Pipeline.ALUOp_o),
+    .ALUCtrl_o      ()
+);
+
+ALU ALU(
+    .data1_i        (MUX_ALU1.data_o),
+    .data2_i        (MUX_ALUSrc.data_o),
+    .ALUCtrl_i      (ALU_Control.ALUCtrl_o),
+    .data_o         ()
+);
+
+Forwarding Forwarding(
+    .IDEXRS1addr_i  (IDEX_Pipeline.RS1addr_o),
+    .IDEXRS2addr_i  (IDEX_Pipeline.RS2addr_o),
+    .EXMEMRDaddr_i  (EXMEM_Pipeline.RDaddr_o),
+    .MEMWBRDaddr_i  (MEMWB_Pipeline.RDaddr_o),
+    .EXMEMRegWrite_i(EXMEM_Pipeline.RegWrite_o),
+    .MEMWBRegWrite_i(MEMWB_Pipeline.RegWrite_o),
+    .ForwardA_o     (),
+    .ForwardB_o     ()
+);
+
+// MEM Stage
+
+EXMEM_Pipeline EXMEM_Pipeline(
+    .clk_i          (clk_i),
+    .start_i        (start_i),
+    .MemRead_i      (IDEX_Pipeline.MemRead_o),
+    .MemWrite_i     (IDEX_Pipeline.MemWrite_o),
+    .MemtoReg_i     (IDEX_Pipeline.MemtoReg_o),
+    .RegWrite_i     (IDEX_Pipeline.RegWrite_o),
+    .ALU_i          (ALU.data_o),
+    .ALU2_i         (MUX_ALU2.data_o),
+    .RDaddr_i       (IDEX_Pipeline.RDaddr_o),
+    .MemRead_o      (),
+    .MemWrite_o     (),
+    .MemtoReg_o     (),
+    .RegWrite_o     (),
+    .ALU_o          (),
+    .ALU2_o         (),
+    .RDaddr_o       ()
+);
+
+Data_Memory Data_Memory(
+    .clk_i          (clk_i),
+    .addr_i         (EXMEM_Pipeline.ALU_o),
+    .MemWrite_i     (EXMEM_Pipeline.MemWrite_o),
+    .data_i         (EXMEM_Pipeline.ALU2_o),
+    .data_o         ()
+);
+
+// WB Stage
+
+MEMWB_Pipeline MEMWB_Pipeline(
+    .clk_i          (clk_i),
+    .start_i        (start_i),
+    .MemtoReg_i     (EXMEM_Pipeline.MemtoReg_o),
+    .RegWrite_i     (EXMEM_Pipeline.RegWrite_o),
+    .Data_Memory_i  (Data_Memory.data_o),
+    .ALU_i          (EXMEM_Pipeline.ALU_o),
+    .RDaddr_i       (EXMEM_Pipeline.RDaddr_o),
+    .MemtoReg_o     (),
+    .RegWrite_o     (),
+    .Data_Memory_o  (),
+    .ALU_o          (),
+    .RDaddr_o       ()
+);
+
+MUX2 MUX_WB(
+    .data1_i        (MEMWB_Pipeline.ALU_o),
+    .data2_i        (MEMWB_Pipeline.Data_Memory_o),
+    .select_i       (MEMWB_Pipeline.MemtoReg_o),
+    .data_o         ()
+);
+
+
+
+endmodule
+
+

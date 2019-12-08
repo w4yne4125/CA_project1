@@ -1,13 +1,11 @@
 module CPU
 (
     clk_i, 
-    rst_i,
     start_i
 );
 
 // Ports
 input               clk_i;
-input               rst_i;
 input               start_i;
 
 // ------------------IF Stage Start----------------
@@ -21,7 +19,7 @@ MUX32 MUX_PC(
 
 PC PC(
     .clk_i      (clk_i),
-    .rst_i      (rst_i),
+    .rst_i      (start_i),
     .start_i    (start_i),
     .PCWrite_i  (!Hazard_Detection_Unit.stall_o), 
     .pc_i       (MUX_PC.data_o),
@@ -44,7 +42,7 @@ Adder Add_PC(
 
 Pipe_IF_ID Pipe_IF_ID( 
     .clk_i         (clk_i),
-    .rst_i         (rst_i),
+    .rst_i         (start_i),
     .flush_i       (Control.flush_o),
     .stall_i       (Hazard_Detection_Unit.stall_o),
 
@@ -86,12 +84,13 @@ Immgen Immgen(
 
 MuxControl MUX_IDEX ( // care
     .stall_i    (Hazard_Detection_Unit.stall_o),
-    .ALUSrc_i   (Control.ALUSrc_o),
     .MemToReg_i (Control.MemToReg_o),
     .RegWrite_i (Control.RegWrite_o),
     .MemWrite_i (Control.MemWrite_o),
     .MemRead_i  (Control.MemRead_o),
+
     .Branch_i   (Control.Branch_o),
+    .ALUSrc_i   (Control.ALUSrc_o),
     .ALUOp_i    (Control.ALUOp_o),
     .ALUSrc_o   (),
     .MemToReg_o (),
@@ -136,7 +135,7 @@ Registers Registers(
 
 Pipe_ID_EX Pipe_ID_EX(
     .clk_i          (clk_i),
-    .rst_i          (rst_i),
+    .rst_i          (start_i),
 
     .RSdata_i       (Registers.RS1data_o),
     .RTdata_i       (Registers.RS2data_o),
@@ -223,7 +222,7 @@ ALU_Control ALU_Control(
 
 Pipe_EX_MEM Pipe_EX_MEM(
     .clk_i          (clk_i),
-    .rst_i          (rst_i),
+    .rst_i          (start_i),
     
     .ALU_Res_i      (ALU.data_o),
     .ALU_Res_o      (),
@@ -257,7 +256,7 @@ Data_Memory Data_Memory(
 
 Pipe_MEM_WB Pipe_MEM_WB(
     .clk_i      (clk_i),
-    .rst_i      (rst_i),
+    .rst_i      (start_i),
     
     .ALU_Res_i  (Pipe_EX_MEM.ALU_Res_o),
     .ALU_Res_o  (),

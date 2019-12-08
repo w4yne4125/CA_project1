@@ -29,11 +29,20 @@ output reg MemToReg_o;
 output reg RegWrite_o;
 
 always @(posedge clk_i or negedge rst_i) begin
-    ALU_Res_o <= ALU_Res_i;
-    Read_Data_o <= Read_Data_i;
-    RdAddr_o <= RdAddr_i;
-    MemToReg_o <= MemToReg_i;
-    RegWrite_o <= RegWrite_i;
+    if (!rst_i) begin
+        ALU_Res_o <= 0;
+        Read_Data_o <= 0;
+        RdAddr_o <= 0;
+        MemToReg_o <= 0;
+        RegWrite_o <= 0;
+    end
+    else begin
+        ALU_Res_o <= ALU_Res_i;
+        Read_Data_o <= Read_Data_i;
+        RdAddr_o <= RdAddr_i;
+        MemToReg_o <= MemToReg_i;
+        RegWrite_o <= RegWrite_i;
+    end
 end
 
 endmodule

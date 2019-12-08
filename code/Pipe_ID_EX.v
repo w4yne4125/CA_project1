@@ -59,7 +59,7 @@ always @(posedge clk_i or negedge rst_i)begin
     if (!rst_i) begin
     	RSdata_o <= 0;
     	RTdata_o <= 0;
-    	
+        immed_o  <= 0;	
     	RSaddr_o <= 0;
     	RTaddr_o <= 0;
     	RDaddr_o <= 0;
@@ -76,6 +76,7 @@ always @(posedge clk_i or negedge rst_i)begin
     else begin
     	RSdata_o <= RSdata_i;
     	RTdata_o <= RTdata_i;
+        immed_o  <= immed_i;	
     	
     	RSaddr_o <= RSaddr_i;
     	RTaddr_o <= RTaddr_i;
